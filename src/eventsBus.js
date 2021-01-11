@@ -1,4 +1,4 @@
-var events = {
+const events = {
   events: {},
   on: function (eventName, fn) {
     this.events[eventName] = this.events[eventName] || [];
@@ -22,3 +22,5 @@ var events = {
     }
   }
 };
+
+export default events;

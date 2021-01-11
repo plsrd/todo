@@ -1,1 +1,2 @@
-import {projects} from './projectHandler.js'
+import events from "./eventsBus"
+import projectHandler from "./projectHandler"
