@@ -1,13 +1,14 @@
 import events from "./eventsBus"
 import initProjectHandler from "./projectHandler"
+import initDisplayHandler from "./displayHandler";
 
 initProjectHandler();
+initDisplayHandler();
 
 (function eventHandlers() {
   const addBtn = document.getElementById('add');
-console.log(addBtn)
   addBtn.addEventListener('click', () => {
-    events.emit('addBook', [1,2,3,4,['a', 'b']]);
+    events.emit('addNewProject');
     console.log('emitting')
   });
 })();
