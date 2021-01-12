@@ -6,7 +6,7 @@ function initProjectFormController() {
   events.on('checkInputs', getFormInfo);
 }
 
-const domCache = {
+export const domCache = {
   main: document.getElementById('main'),
   projectsWindow: document.getElementById('projects-window'),
   addBtn: document.getElementById('add'),
@@ -78,7 +78,7 @@ function createProjectInputs() {
   
   cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
 
-  events.emit('projectFormCreated', domCache);
+  events.emit('projectFormCreated', domCache.createBtn);
 }
 
 
@@ -94,7 +94,8 @@ function getFormInfo() {
         return
       }
   }
-  console.log(data);
+  events.emit('createProject', data);
+  console.log('emit project');
 }
 
 export default initProjectFormController;

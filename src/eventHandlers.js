@@ -13,9 +13,8 @@ function addButtonEvents(){
 }
 
 function projectFormEvents(object) {
-  object.createBtn.addEventListener('click', () => {
+  object.addEventListener('click', () => {
     events.emit('checkInputs');
-    console.log('checkInputs');
   })
 }
 

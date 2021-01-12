@@ -9,7 +9,7 @@ let projects = [];
 
 function getExistingProjects() {
   if (projects[0] !== undefined) {
-    events.emit('existingProjects', projects);
+    events.emit('createProject', projects);
   }
 }
 
