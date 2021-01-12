@@ -10,6 +10,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/displayHandler.js":
+/*!*******************************!*\
+  !*** ./src/displayHandler.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _eventsBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eventsBus */ \"./src/eventsBus.js\");\n\n\n\nfunction initDisplayHandler() {\n  _eventsBus__WEBPACK_IMPORTED_MODULE_0__.default.on('addNewProject', drawProjectInput)\n}\n\nconst domCache = {\n  projectsWindow: document.getElementById('projects-window'),\n}\n\nfunction createElement(type, target, id, attributes) {\n  const el = document.createElement(type);\n  target.appendChild(el);\n  el.setAttribute('id', id);\n  for (let key in attributes) {\n    el.setAttribute(key, attributes[key]);\n  }\n}\n\nfunction createSelect(target, id, options) {\n  const el = document.createElement('select');\n  target.appendChild(el);\n  el.setAttribute('id', id);\n  options.forEach(item => {\n    const option = document.createElement('option');\n    option.setAttribute('value', item);\n    option.textContent = item;\n    el.appendChild(option);\n  });\n}\n\nfunction drawProjectInput() {\n  createElement('input', domCache.projectsWindow, 'title', {'type': 'text', 'placeholder': 'project title'});\n  createElement('input', domCache.projectsWindow, 'description', {'type': 'text', 'placeholder': 'project description'});\n  createElement('input', domCache.projectsWindow, 'due date', {'type': 'date', 'placeholder': 'project due date'});\n  createSelect(domCache.projectsWindow, 'priority', [1, 2, 3, 4, 5]);\n  createElement('input', domCache.projectsWindow, 'notes', {'type': 'text', 'placeholder': 'notes'});\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initDisplayHandler);\n\n//# sourceURL=webpack://todo/./src/displayHandler.js?");
+
+/***/ }),
+
 /***/ "./src/eventsBus.js":
 /*!**************************!*\
   !*** ./src/eventsBus.js ***!
@@ -26,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _eventsBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eventsBus */ \"./src/eventsBus.js\");\n/* harmony import */ var _projectHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectHandler */ \"./src/projectHandler.js\");\n\n\n\n(0,_projectHandler__WEBPACK_IMPORTED_MODULE_1__.default)();\n\n(function eventHandlers() {\n  const addBtn = document.getElementById('add');\nconsole.log(addBtn)\n  addBtn.addEventListener('click', () => {\n    _eventsBus__WEBPACK_IMPORTED_MODULE_0__.default.emit('addBook', [1,2,3,4,['a', 'b']]);\n    console.log('emitting')\n  });\n})();\n\n//# sourceURL=webpack://todo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _eventsBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eventsBus */ \"./src/eventsBus.js\");\n/* harmony import */ var _projectHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projectHandler */ \"./src/projectHandler.js\");\n/* harmony import */ var _displayHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./displayHandler */ \"./src/displayHandler.js\");\n\n\n\n\n(0,_projectHandler__WEBPACK_IMPORTED_MODULE_1__.default)();\n(0,_displayHandler__WEBPACK_IMPORTED_MODULE_2__.default)();\n\n(function eventHandlers() {\n  const addBtn = document.getElementById('add');\n  addBtn.addEventListener('click', () => {\n    _eventsBus__WEBPACK_IMPORTED_MODULE_0__.default.emit('addNewProject');\n    console.log('emitting')\n  });\n})();\n\n//# sourceURL=webpack://todo/./src/index.js?");
 
 /***/ }),
 
@@ -36,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _eve
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _eventsBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eventsBus */ \"./src/eventsBus.js\");\n\n\nfunction initProjectHandler() {\n  (() => {\n    _eventsBus__WEBPACK_IMPORTED_MODULE_0__.default.on('addBook', createNewProject)\n  })();\n}\n\nlet projects = [];\n\n  class Project {\n    constructor(title, description, dueDate, priority, notes, tasks) {\n      this.title = title;\n      this.description = description;\n      this.dueDate = dueDate;\n      this.priority = priority;\n      this.notes = notes;\n      this.tasks = tasks;\n    }\n  }\n\n  const createNewProject = (data) => {\n    console.log('creatingBook')\n    let newProject = new Project(data[0], data[1], data[2], data[3], data[4], data[5]);\n    projects.push(newProject);\n    console.log(newProject);\n  }\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initProjectHandler);\n\n//# sourceURL=webpack://todo/./src/projectHandler.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _eventsBus__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./eventsBus */ \"./src/eventsBus.js\");\n\n\nfunction initProjectHandler() {\n  _eventsBus__WEBPACK_IMPORTED_MODULE_0__.default.on('addBook', createNewProject)\n}\n\nlet projects = [];\n\nclass Project {\n  constructor(title, description, dueDate, priority, notes, tasks) {\n    this.title = title;\n    this.description = description;\n    this.dueDate = dueDate;\n    this.priority = priority;\n    this.notes = notes;\n    this.tasks = tasks;\n  }\n}\n\nconst createNewProject = (data) => {\n  let newProject = new Project(data[0], data[1], data[2], data[3], data[4], data[5]);\n  projects.push(newProject);\n  console.log(projects);\n}\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initProjectHandler);\n\n//# sourceURL=webpack://todo/./src/projectHandler.js?");
 
 /***/ })
 
