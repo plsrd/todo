@@ -1,10 +1,10 @@
 import events from "./eventsBus"
 import initEventHandlers from './eventHandlers'
 import initProjectHandler from "./projectHandler"
-import initNewProjectController from "./newProjectController";
+import initProjectFormController from "./projectFormController";
 
 initEventHandlers();
 initProjectHandler();
-initNewProjectController();
+initProjectFormController();
 
 events.emit('addButtonCreated');

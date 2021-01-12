@@ -1,8 +1,9 @@
 import events from './eventsBus';
 
 
-function initNewProjectController() {
-  events.on('addNewProject', createProjectInputs)
+function initProjectFormController() {
+  events.on('addNewProject', createProjectInputs);
+  events.on('checkInputs', getFormInfo);
 }
 
 const domCache = {
@@ -80,4 +81,20 @@ function createProjectInputs() {
   events.emit('projectFormCreated', domCache);
 }
 
-export default initNewProjectController;
+
+
+function getFormInfo() {
+  let data = [];
+  let keys = ['title', 'description', 'dueDate', 'priority', 'notes'];
+  for (let i = 0; i < keys.length; i++){
+      if (domCache[`${keys[i]}`].value !== '') {
+        data.push(domCache[`${keys[i]}`].value);
+      } else {
+        domCache[`${keys[i]}`].classList.add('empty');
+        return
+      }
+  }
+  console.log(data);
+}
+
+export default initProjectFormController;

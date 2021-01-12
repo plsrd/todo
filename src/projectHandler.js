@@ -26,6 +26,7 @@ class Project {
 export const createNewProject = (data) => {
   let newProject = new Project(data[0], data[1], data[2], data[3], data[4]);
   projects.push(newProject);
+  events.emit('newProject', newProject);
 }
 
 

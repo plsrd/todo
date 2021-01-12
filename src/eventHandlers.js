@@ -12,18 +12,10 @@ function addButtonEvents(){
   });
 }
 
-function getFormInfo(object) {
-  let data = [];
-  let keys = ['title', 'description', 'dueDate', 'priority', 'notes'];
-  keys.forEach(key => {
-    data.push(object[`${key}`].value);
-  });
-  return data;
-}
-
 function projectFormEvents(object) {
   object.createBtn.addEventListener('click', () => {
-    events.emit('createProject', getFormInfo(object));
+    events.emit('checkInputs');
+    console.log('checkInputs');
   })
 }
 
