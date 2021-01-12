@@ -27,12 +27,14 @@ export function cacheElements(els) {
 
 export function createElement(type, target, id, attributes, content) {
   const el = document.createElement(type);
-  target.appendChild(el);
-
-  if (id !== 'none') {
-    el.setAttribute('id', id);
+  if (attributes.hasOwnProperty('prepend')) {
+    target.prepend(el)
+  } else {
+    target.appendChild(el);
   }
-
+  if (id !== 'none') {
+    el.setAttribute('id', id)
+  }
   if (attributes !== undefined) {
     for (let key in attributes) {
       el.setAttribute(key, attributes[key]);
@@ -57,8 +59,8 @@ function createSelect(target, id, options) {
 }
 
 function createProjectInputs() {
-  domCache.main.removeChild(domCache.addBtn);
-  createElement('form', domCache.projectsWindow, 'create-project');
+  domCache.addBtn.classList.add('disabled');
+  createElement('form', domCache.projectsWindow, 'create-project', {'prepend': true});
 
   cacheElements(['create-project']);
 

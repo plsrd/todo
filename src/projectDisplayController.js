@@ -13,16 +13,17 @@ function clearDisplay(target) {
 }
 
 function drawProject(object) {
-  clearDisplay(domCache.projectsWindow);
-
+  domCache.addBtn.classList.remove('disabled');
+  domCache.projectsWindow.removeChild(domCache.createProject);
   createElement('div', domCache.projectsWindow, object.title, {'class': 'project'});
   cacheElements([object.title]);
 
   const target = domCache[`${object.title}`];
+  createElement('h2', target, 'none', {'class': 'project-title'}, object.title);
   createElement('p', target, 'none', {'class': 'project-due-date'}, object.dueDate);
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
-  createElement('h2', target, 'none', {'class': 'project-title'}, object.title);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
+  createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
   createTags(object.tags, target);
 }
 
