@@ -62,24 +62,29 @@ function createProjectInputs() {
 
   cacheElements(['create-project']);
 
-  createElement('label', domCache.createProject, 'title-label', {'for': 'title'}, 'title');
-  createElement('input', domCache.createProject, 'title', {'type': 'text', 'placeholder': 'project title'});
+  const target = domCache.createProject;
 
-  createElement('label', domCache.createProject, 'description-label', {'for': 'description'}, 'description');
-  createElement('input', domCache.createProject, 'description', {'type': 'text', 'placeholder': 'project description'});
+  createElement('label', target, 'title-label', {'for': 'title'}, 'title');
+  createElement('input', target, 'title', {'type': 'text', 'placeholder': 'project title'});
 
-  createElement('label', domCache.createProject, 'due-date-label', {'for': 'due-date'}, 'due date');
-  createElement('input', domCache.createProject, 'due-date', {'type': 'date', 'placeholder': 'project due date'});
+  createElement('label', target, 'description-label', {'for': 'description'}, 'description');
+  createElement('input', target, 'description', {'type': 'text', 'placeholder': 'project description'});
 
-  createElement('label', domCache.createProject, 'priority-label', {'for': 'priority'}, 'priority');
-  createSelect(domCache.createProject, 'priority', [1, 2, 3, 4, 5]);
+  createElement('label', target, 'due-date-label', {'for': 'due-date'}, 'due date');
+  createElement('input', target, 'due-date', {'type': 'date', 'placeholder': 'project due date'});
 
-  createElement('label', domCache.createProject, 'notes-label', {'for': 'notes'}, 'notes');
-  createElement('input', domCache.createProject, 'notes', {'type': 'text', 'placeholder': 'notes'});
+  createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
+  createSelect(target, 'priority', [1, 2, 3, 4, 5]);
 
-  createElement('input', domCache.createProject, 'create-btn', {'type': 'button'}, 'create');
+  createElement('label', target, 'notes-label', {'for': 'notes'}, 'notes');
+  createElement('input', target, 'notes', {'type': 'text', 'placeholder': 'notes'});
+
+  createElement('label', target, 'tags-label', {'for': 'tags'}, 'tags');
+  createElement('input', target, 'tags', {'type': 'text', 'placeholder': 'tags'});
+
+  createElement('input', target, 'create-btn', {'type': 'button'}, 'create');
   
-  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
+  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'tags', 'create-btn']);
 
   events.emit('projectFormCreated', domCache.createBtn);
 }
@@ -88,7 +93,7 @@ function createProjectInputs() {
 
 function getFormInfo() {
   let data = [];
-  let keys = ['title', 'description', 'dueDate', 'priority', 'notes'];
+  let keys = ['title', 'description', 'dueDate', 'priority', 'notes', 'tags'];
   for (let i = 0; i < keys.length; i++){
       if (domCache[`${keys[i]}`].value !== '') {
         data.push(domCache[`${keys[i]}`].value);

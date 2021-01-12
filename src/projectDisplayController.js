@@ -23,8 +23,25 @@ function drawProject(object) {
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('h2', target, 'none', {'class': 'project-title'}, object.title);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
+  createTags(object.tags, target);
+}
 
-
+function createTags(tags, target) {
+  let classNum = 0;
+  tags.forEach(tag => {
+    let name;
+    if (tag[0] === ' ') {
+      name  = tag.slice(1);
+    } else {
+      name = tag;
+    }
+    createElement('p', target, 'none', {'class': `${name} ${classNum}`}, tag);
+    if (classNum === 5) {
+      classNum = 0;
+    } else {
+      classNum++;
+    }
+  });
 }
 
 export default initProjectDisplay;
