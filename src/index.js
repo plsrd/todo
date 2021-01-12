@@ -9,6 +9,5 @@ initDisplayHandler();
   const addBtn = document.getElementById('add');
   addBtn.addEventListener('click', () => {
     events.emit('addNewProject');
-    console.log('emitting')
   });
 })();
