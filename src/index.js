@@ -1,13 +1,10 @@
 import events from "./eventsBus"
+import initEventHandlers from './eventHandlers'
 import initProjectHandler from "./projectHandler"
-import initDisplayHandler from "./displayHandler";
+import initNewProjectController from "./newProjectController";
 
+initEventHandlers();
 initProjectHandler();
-initDisplayHandler();
+initNewProjectController();
 
-(function eventHandlers() {
-  const addBtn = document.getElementById('add');
-  addBtn.addEventListener('click', () => {
-    events.emit('addNewProject');
-  });
-})();
+events.emit('addButtonCreated');
