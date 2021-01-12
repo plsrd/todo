@@ -12,7 +12,7 @@ export const domCache = {
   addBtn: document.getElementById('add'),
 }
 
-function cacheElements(els) {
+export function cacheElements(els) {
   els.forEach(id => {
     if (id.includes('-')) {
       let key = id.split('-');
@@ -25,10 +25,13 @@ function cacheElements(els) {
   });
 }
 
-function createElement(type, target, id, attributes, content) {
+export function createElement(type, target, id, attributes, content) {
   const el = document.createElement(type);
   target.appendChild(el);
-  el.setAttribute('id', id);
+
+  if (id !== 'none') {
+    el.setAttribute('id', id);
+  }
 
   if (attributes !== undefined) {
     for (let key in attributes) {
@@ -95,7 +98,6 @@ function getFormInfo() {
       }
   }
   events.emit('createProject', data);
-  console.log('emit project');
 }
 
 export default initProjectFormController;
