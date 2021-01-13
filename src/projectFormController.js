@@ -35,7 +35,7 @@ export function createElement(type, target, id, attributes, content) {
   if (id !== 'none') {
     el.setAttribute('id', id)
   }
-  if (attributes !== undefined && !attributes.hasOwnProperty('prepend')) {
+  if (attributes && !attributes.hasOwnProperty('prepend')) {
     for (let key in attributes) {
       el.setAttribute(key, attributes[key]);
     }
@@ -60,20 +60,10 @@ function createSelect(target, id, options) {
 
 function createInputFields(fields, target) {
   fields.forEach(field => {
-    let type = 'text';
-    let fieldName;
-
-    if (field.includes('date')){ 
-      type = 'date'; 
-    }
-    
-    if (field.includes('-')) {
-      fieldName = field.split('-').join(' ');
-    } else {
-      fieldName = field;
-    }
-      createElement('label', target, 'none', {'for': field}, fieldName);
-      createElement('input', target, field, {'type': type, 'placeholder': fieldName});
+    let type = field.includes('date') ? 'date' : 'text'
+    const fieldName = field.split('-').join(' ');
+    createElement('label', target, 'none', {'for': field}, fieldName);
+    createElement('input', target, field, {'type': type, 'placeholder': fieldName});
     });
 }
 
