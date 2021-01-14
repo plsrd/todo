@@ -32,7 +32,7 @@ export function createElement(type, target, id, attributes, content) {
   } else {
     target.appendChild(el);
   }
-  if (id) {
+  if (id !== 'none') {
     el.setAttribute('id', id)
   }
   if (attributes && !attributes.hasOwnProperty('prepend')) {

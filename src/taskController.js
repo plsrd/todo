@@ -13,11 +13,22 @@ function createTaskForm(target) {
   createInputFields(['task'], container);
   createElement('button', container, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements(['task', 'task-btn']);
+  domCache.tasks = [];
   events.emit('taskBtnCreated', domCache.taskBtn);
 }
 
 function createTask() {
-  console.log(domCache.task.value);
+  domCache.tasks.push(domCache.task.value);
+  drawTask(domCache.task.value);
+  domCache.task.value = '';
+}
+
+function drawTask(value) {
+  createElement('div', domCache.tasksContainer, 'created-tasks', {'class': 'created-task-container'});
+  cacheElements(['created-tasks']);
+  const container = domCache.createdTasks;
+  createElement('input', container, 'none', {'type': 'checkbox', 'class': 'task', 'name': value});
+  createElement('label', container, 'none', {'for': value}, value);
 }
 
 export default initTaskController;
