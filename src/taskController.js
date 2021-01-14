@@ -2,7 +2,8 @@ import events from './eventsBus'
 import { domCache, cacheElements, createElement, createInputFields } from './projectFormController';
 
 function initTaskController() {
-  events.on('createTaskForm', createTaskForm)
+  events.on('createTaskForm', createTaskForm);
+  events.on('createTask', createTask)
 }
 
 function createTaskForm(target) {
@@ -10,8 +11,13 @@ function createTaskForm(target) {
   cacheElements(['tasks-container']);
   const container = domCache.tasksContainer;
   createInputFields(['task'], container);
-  createElement('button', target, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
-  createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
+  createElement('button', container, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
+  cacheElements(['task', 'task-btn']);
+  events.emit('taskBtnCreated', domCache.taskBtn);
+}
+
+function createTask() {
+  console.log(domCache.task.value);
 }
 
 export default initTaskController;

@@ -2,7 +2,9 @@ import events from "./eventsBus";
 
 function initEventHandlers() {
   events.on('addButtonCreated', addButtonEvents);
-  events.on('projectFormCreated', projectFormEvents)
+  events.on('projectFormCreated', projectFormEvents);
+  events.on('tagBtnCreated', tagBtnEvents);
+  events.on('taskBtnCreated', taskBtnEvents);
 }
 
 function addButtonEvents(){
@@ -12,10 +14,22 @@ function addButtonEvents(){
   });
 }
 
-function projectFormEvents(object) {
-  object.addEventListener('click', () => {
+function projectFormEvents(button) {
+  button.addEventListener('click', () => {
     events.emit('checkInputs');
-  })
+  });
+}
+
+function tagBtnEvents(button) {
+  button.addEventListener('click', () => {
+    events.emit('createTag');
+  });
+}
+
+function taskBtnEvents(button) {
+  button.addEventListener('click', () => {
+    events.emit('createTask');
+  });
 }
 
 export default initEventHandlers;

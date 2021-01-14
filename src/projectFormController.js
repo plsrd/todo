@@ -78,10 +78,10 @@ function createProjectForm() {
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
   createInputFields(['notes'], target);
+  events.emit('createTaskForm', target);
   events.emit('createTagsContainer', target);
-  events.emit('createTaskForm', target)
-  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'tag-input', 'tag-btn', 'create-btn']);
-
+  createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
+  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
   events.emit('projectFormCreated', domCache.createBtn);
 }
 
