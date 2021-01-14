@@ -24,10 +24,19 @@ function drawProject(object) {
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
   createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
-  createTags(object.tags, target);
+  displayTasks(object.tasks, object, target);
 }
 
-function createTags(tags, target) {
+function displayTasks(tasks, project, target) {
+  tasks.forEach(task => {
+    createElement('div', target, `${project.title}-task-${tasks.indexOf(task)}`, {'class': 'project-task-container'});
+    const container = document.getElementById(`${project.title}-task-${tasks.indexOf(task)}`);
+    createElement('input', container, 'none', {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
+    createElement('label', container, 'none', {'for': tasks.indexOf(task)}, task);
+  });
+}
+
+function displayTags(tags, target) {
   let classNum = 0;
   tags.forEach(tag => {
     let name;

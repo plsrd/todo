@@ -18,9 +18,14 @@ function createTaskForm(target) {
 }
 
 function createTask() {
-  domCache.tasks.push(domCache.task.value);
-  drawTask(domCache.task.value);
-  domCache.task.value = '';
+  if (domCache.task.value) {
+    domCache.tasks.push(domCache.task.value);
+    drawTask(domCache.task.value);
+    domCache.task.value = '';
+    events.emit('updateTasks', domCache.tasks);
+  } else {
+    domCache.task.classList.add('empty');
+  }
 }
 
 function drawTask(value) {

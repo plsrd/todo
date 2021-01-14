@@ -14,13 +14,13 @@ function getExistingProjects() {
 }
 
 class Project {
-  constructor(title, description, dueDate, priority, notes, tags) {
+  constructor(title, description, dueDate, priority, notes, tasks) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-    this.tags = tags.split(',');
+    this.tasks = tasks
   }
 }
 
