@@ -18,11 +18,19 @@ function createTaskForm(target) {
   events.emit('taskBtnCreated', domCache.taskBtn);
 }
 
+class Task {
+  constructor(task, status) {
+    this.task = task;
+    this.status = status;
+  }
+}
+
 function createTask() {
-  if (domCache.task.value) {
+  const value = domCache.task.value;
+  if (value) {
     if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
-    domCache.tasks.push(domCache.task.value);
-    drawTask(domCache.task.value);
+    domCache.tasks.push(new Task(value, 'incomplete'));
+    drawTask(value);
     domCache.task.value = '';
     events.emit('updateTasks', domCache.tasks);
   } else {
