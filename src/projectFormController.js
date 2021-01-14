@@ -1,4 +1,5 @@
 import events from './eventsBus';
+import initTagController from './tagController';
 
 
 function initProjectFormController() {
@@ -32,7 +33,7 @@ export function createElement(type, target, id, attributes, content) {
   } else {
     target.appendChild(el);
   }
-  if (id !== 'none') {
+  if (id) {
     el.setAttribute('id', id)
   }
   if (attributes && !attributes.hasOwnProperty('prepend')) {
@@ -41,7 +42,7 @@ export function createElement(type, target, id, attributes, content) {
     }
   }
 
-  if(content !== undefined) {
+  if(content) {
     el.textContent = content;
   }
 }
@@ -77,10 +78,11 @@ function createProjectForm() {
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
-  createInputFields(['notes', 'tags'], target);
+  createInputFields(['notes'], target);
+  events.emit('createTagsContainer', target);
   createTaskForm(target);
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
-  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'tags', 'create-btn']);
+  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'tag-input', 'tag-btn', 'create-btn']);
 
   events.emit('projectFormCreated', domCache.createBtn);
 }
