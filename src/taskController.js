@@ -35,6 +35,10 @@ class Task {
     this.task = task;
     this.status = status;
   }
+
+  set parent(id) {
+    this.project = id;
+  }
 }
 
 function createTask() {
