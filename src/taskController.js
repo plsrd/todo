@@ -39,6 +39,10 @@ class Task {
   set parent(id) {
     this.project = id;
   }
+
+  set identifier(id) {
+    this.id = id;
+  }
 }
 
 function createTask() {

@@ -30,10 +30,12 @@ function drawProject(object) {
 function displayTasks(tasks, project, target) {
   tasks.forEach(task => {
     task.parent = project.id;
+    task.identifier = `${task.project}-${tasks.indexOf(task)}`;
     createElement('div', target, `${project.title}-task-${tasks.indexOf(task)}`, {'class': 'project-task-container'});
     const container = document.getElementById(`${project.title}-task-${tasks.indexOf(task)}`);
-    createElement('input', container, 'none', {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
+    createElement('input', container, task.id, {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
     createElement('label', container, 'none', {'for': tasks.indexOf(task)}, task.task);
+    console.log(task);
   });
   events.emit('addTaskEvents', target);
 }
