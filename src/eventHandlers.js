@@ -6,6 +6,7 @@ function initEventHandlers() {
   events.on('tagBtnCreated', tagBtnEvents);
   events.on('taskBtnCreated', taskBtnEvents);
   events.on('taskInputCreated', taskInputEvents);
+  events.on('addTaskBtnCreated', addTaskBtnEvents)
 }
 
 function addButtonEvents(){
@@ -40,6 +41,12 @@ function taskInputEvents(input){
       events.emit('createTask');
     }
   });
+}
+
+function addTaskBtnEvents(button){
+  button.addEventListener('click', () => {
+    events.emit('createTaskForm')
+  })
 }
 
 export default initEventHandlers;

@@ -78,7 +78,7 @@ function createProjectForm() {
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
-  events.emit('createTaskForm', target);
+  events.emit('createTaskContainer', target);
   createInputFields(['notes'], target);
   events.emit('createTagsContainer', target);
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');

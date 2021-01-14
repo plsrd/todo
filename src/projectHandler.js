@@ -20,7 +20,8 @@ class Project {
     this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
-    this.tasks = tasks
+    this.tasks = tasks;
+    this.id = `proj${document.getElementsByClassName('project').length}`;
   }
 }
 
