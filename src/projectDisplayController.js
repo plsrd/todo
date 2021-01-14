@@ -23,8 +23,8 @@ function drawProject(object) {
   createElement('p', target, 'none', {'class': 'project-due-date'}, object.dueDate);
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
-  createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
   displayTasks(object.tasks, object, target);
+  createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
 }
 
 function displayTasks(tasks, project, target) {

@@ -78,8 +78,8 @@ function createProjectForm() {
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
-  createInputFields(['notes'], target);
   events.emit('createTaskForm', target);
+  createInputFields(['notes'], target);
   events.emit('createTagsContainer', target);
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
   cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
@@ -106,7 +106,6 @@ function batchFormInfo() {
 
 function updateTasks(tasks) {
   domCache.tasks = tasks;
-  console.log(domCache.tasks);
 }
 
 export default initProjectFormController;

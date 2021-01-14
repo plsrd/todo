@@ -14,11 +14,13 @@ function createTaskForm(target) {
   createElement('button', container, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements(['task', 'task-btn']);
   domCache.tasks = [];
+  events.emit('taskInputCreated', domCache.task);
   events.emit('taskBtnCreated', domCache.taskBtn);
 }
 
 function createTask() {
   if (domCache.task.value) {
+    if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
     domCache.tasks.push(domCache.task.value);
     drawTask(domCache.task.value);
     domCache.task.value = '';

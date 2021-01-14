@@ -5,6 +5,7 @@ function initEventHandlers() {
   events.on('projectFormCreated', projectFormEvents);
   events.on('tagBtnCreated', tagBtnEvents);
   events.on('taskBtnCreated', taskBtnEvents);
+  events.on('taskInputCreated', taskInputEvents);
 }
 
 function addButtonEvents(){
@@ -29,6 +30,15 @@ function tagBtnEvents(button) {
 function taskBtnEvents(button) {
   button.addEventListener('click', () => {
     events.emit('createTask');
+  });
+}
+
+function taskInputEvents(input){
+  input.addEventListener('keyup', (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      events.emit('createTask');
+    }
   });
 }
 
