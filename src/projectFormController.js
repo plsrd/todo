@@ -1,5 +1,4 @@
 import events from './eventsBus';
-import initTagController from './tagController';
 
 
 function initProjectFormController() {
@@ -59,7 +58,7 @@ function createSelect(target, id, options) {
   });
 }
 
-function createInputFields(fields, target) {
+export function createInputFields(fields, target) {
   fields.forEach(field => {
     const fieldName = field.split('-').join(' ');
     const type = (field.includes('date')) ? 'date' : 'text';
@@ -80,19 +79,10 @@ function createProjectForm() {
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
   createInputFields(['notes'], target);
   events.emit('createTagsContainer', target);
-  createTaskForm(target);
-  createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
+  events.emit('createTaskForm', target)
   cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'tag-input', 'tag-btn', 'create-btn']);
 
   events.emit('projectFormCreated', domCache.createBtn);
-}
-
-function createTaskForm(target) {
-  createElement('div', target, 'tasks-container', {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
-  cacheElements(['tasks-container']);
-  const container = domCache.tasksContainer;
-  createInputFields(['task'], container);
-  createElement('button', target, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
 }
 
 
