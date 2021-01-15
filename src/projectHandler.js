@@ -24,8 +24,6 @@ class Project {
     this.tasks = tasks;
     this.id = `proj${document.getElementsByClassName('project').length}`;
   }
-
-
 }
 
 export const createNewProject = (data) => {
@@ -38,8 +36,9 @@ function updateTaskStatus(taskId) {
   const data = taskId.id.split('-');
   const project = projects.find(project => project.id === data[0])
   const task = project.tasks.find(task => task.id === taskId.id);
-  task.status = 'complete';
-  taskId.classList.add('completed-task');
+  task.status = !task.status;
+  console.log(task.status)
+  events.emit('taskStatusChanged', [taskId.id, task.status]);
 }
 
 export default initProjectHandler;

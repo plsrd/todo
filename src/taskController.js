@@ -33,9 +33,9 @@ function createTaskForm() {
 
 
 class Task {
-  constructor(task, status) {
+  constructor(task) {
     this.task = task;
-    this.status = status;
+    this.complete = false;
   }
 
   set parent(id) {
@@ -51,7 +51,7 @@ function createTask() {
   const value = domCache.task.value;
   if (value) {
     if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
-    domCache.tasks.push(new Task(value, 'incomplete'));
+    domCache.tasks.push(new Task(value));
     drawTask(value);
     domCache.task.value = '';
     events.emit('updateTasks', domCache.tasks);

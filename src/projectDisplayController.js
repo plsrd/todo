@@ -3,13 +3,8 @@ import { domCache, cacheElements, createElement } from './projectFormController'
 
 
 function initProjectDisplay() {
-  events.on('newProject', drawProject)
-}
-
-function clearDisplay(target) {
-  while (target.firstChild){
-    target.removeChild(target.firstChild);
-  }
+  events.on('newProject', drawProject);
+  events.on('taskStatusChanged', updateTaskClass)
 }
 
 function drawProject(object) {
@@ -34,8 +29,8 @@ function displayTasks(tasks, project, target) {
     createElement('div', target, `${task.id}-container`, {'class': 'project-task-container'});
     const container = document.getElementById(`${task.id}-container`);
     createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
-    createElement('label', container, 'none', {'for': tasks.indexOf(task)}, task.task);
-    cacheElements([task.id]);
+    createElement('label', container, `${task.id}label`, {'for': tasks.indexOf(task)}, task.task);
+    cacheElements([task.id, `${task.id}label`]);
     events.emit('addTaskEvents', domCache[createId(task.id)]);
   });
   delete domCache.task;
@@ -46,6 +41,12 @@ function createId(id) {
   let word = key[1].charAt(0).toUpperCase() + key[1].slice(1);
   key.splice(1, 1, word);
   return key.join('');
+}
+
+function updateTaskClass(data) {
+  const element = domCache[createId(`${data[0]}label`)];
+  console.log(element);
+  data[1] === true ? element.classList.add('complete') : element.classList.remove('complete');
 }
 
 function displayTags(tags, target) {
@@ -65,5 +66,6 @@ function displayTags(tags, target) {
     }
   });
 }
+
 
 export default initProjectDisplay;
