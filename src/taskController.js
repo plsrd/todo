@@ -4,7 +4,7 @@ import { domCache, cacheElements, createElement, createInputFields } from './pro
 function initTaskController() {
   events.on('createTaskContainer', createTaskContainer);
   events.on('createTaskForm', createTaskForm);
-  events.on('createTask', createTask)
+  events.on('createTask', createTask);
 }
 
 function createTaskContainer(target) {
@@ -29,6 +29,8 @@ function createTaskForm() {
     events.emit('taskBtnCreated', domCache.taskBtn);
   }
 }
+
+
 
 class Task {
   constructor(task, status) {

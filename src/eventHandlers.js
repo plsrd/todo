@@ -6,7 +6,8 @@ function initEventHandlers() {
   events.on('tagBtnCreated', tagBtnEvents);
   events.on('taskBtnCreated', taskBtnEvents);
   events.on('taskInputCreated', taskInputEvents);
-  events.on('addTaskBtnCreated', addTaskBtnEvents)
+  events.on('addTaskBtnCreated', addTaskBtnEvents);
+  events.on('addTaskEvents', addTaskEvents);
 }
 
 function addButtonEvents(){
@@ -46,6 +47,12 @@ function taskInputEvents(input){
 function addTaskBtnEvents(button){
   button.addEventListener('click', () => {
     events.emit('createTaskForm')
+  });
+}
+
+function addTaskEvents(checkbox) {
+  checkbox.addEventListener('click', () => {
+    events.emit('taskComplete', checkbox);
   })
 }
 

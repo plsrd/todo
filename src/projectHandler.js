@@ -3,6 +3,7 @@ import events from "./eventsBus";
 function initProjectHandler() {
   events.on('createProject', createNewProject);
   getExistingProjects();
+  events.on('taskComplete', updateTaskStatus);
 }
 
 let projects = [];
@@ -23,6 +24,8 @@ class Project {
     this.tasks = tasks;
     this.id = `proj${document.getElementsByClassName('project').length}`;
   }
+
+
 }
 
 export const createNewProject = (data) => {
@@ -31,5 +34,12 @@ export const createNewProject = (data) => {
   events.emit('newProject', newProject);
 }
 
+function updateTaskStatus(taskId) {
+  const data = taskId.id.split('-');
+  const project = projects.find(project => project.id === data[0])
+  const task = project.tasks.find(task => task.id === taskId.id);
+  task.status = 'complete';
+  taskId.classList.add('completed-task');
+}
 
 export default initProjectHandler;

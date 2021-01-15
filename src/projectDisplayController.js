@@ -31,14 +31,21 @@ function displayTasks(tasks, project, target) {
   tasks.forEach(task => {
     task.parent = project.id;
     task.identifier = `${task.project}-task${tasks.indexOf(task)}`;
-    createElement('div', target, `${task.id}`, {'class': 'project-task-container'});
-    const container = document.getElementById(`${task.id}`);
-    createElement('input', container, task.id, {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
+    createElement('div', target, `${task.id}-container`, {'class': 'project-task-container'});
+    const container = document.getElementById(`${task.id}-container`);
+    createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
     createElement('label', container, 'none', {'for': tasks.indexOf(task)}, task.task);
-    console.log(task);
+    cacheElements([task.id]);
+    events.emit('addTaskEvents', domCache[createId(task.id)]);
   });
-  events.emit('addTaskEvents', target);
   delete domCache.task;
+}
+
+function createId(id) {
+  let key = id.split('-');
+  let word = key[1].charAt(0).toUpperCase() + key[1].slice(1);
+  key.splice(1, 1, word);
+  return key.join('');
 }
 
 function displayTags(tags, target) {
