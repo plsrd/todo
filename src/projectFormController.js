@@ -3,7 +3,6 @@ import events from './eventsBus';
 
 function initProjectFormController() {
   events.on('addNewProject', createProjectForm);
-  events.on('updateTasks', updateTasks)
   events.on('checkInputs', batchFormInfo);
 }
 
@@ -78,7 +77,6 @@ function createProjectForm() {
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
-  events.emit('createTaskContainer', target);
   createInputFields(['notes'], target);
   events.emit('createTagsContainer', target);
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
@@ -103,9 +101,4 @@ function batchFormInfo() {
   data.push(domCache.tasks);
   events.emit('createProject', data);
 }
-
-function updateTasks(tasks) {
-  domCache.tasks = tasks;
-}
-
 export default initProjectFormController;

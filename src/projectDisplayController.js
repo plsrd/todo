@@ -4,7 +4,8 @@ import { domCache, cacheElements, createElement } from './projectFormController'
 
 function initProjectDisplay() {
   events.on('newProject', drawProject);
-  events.on('taskStatusChanged', updateTaskClass)
+  events.on('drawTask', displayTasks);
+  events.on('taskStatusChanged', updateTaskClass);
 }
 
 function drawProject(object) {
@@ -18,22 +19,26 @@ function drawProject(object) {
   createElement('p', target, 'none', {'class': 'project-due-date'}, object.dueDate);
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
-  if(object.tasks) { displayTasks(object.tasks, object, target) }
   createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
+  createElement('div', target, 'tasks-container', {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
+  cacheElements(['tasks-container']);
+  const container = domCache.tasksContainer;
+  createElement('p', container, 'task-header', {}, 'Tasks')
+  createElement('button', container, 'add-task', {'type': 'button', 'class': 'task-btn'}, '+');
+  cacheElements(['add-task']);
+  events.emit('addTaskBtnCreated', domCache.addTask);
 }
 
-function displayTasks(tasks, project, target) {
-  tasks.forEach(task => {
-    task.parent = project.id;
-    task.identifier = `${task.project}-task${tasks.indexOf(task)}`;
-    createElement('div', target, `${task.id}-container`, {'class': 'project-task-container'});
-    const container = document.getElementById(`${task.id}-container`);
-    createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': tasks.indexOf(task)});
-    createElement('label', container, `${task.id}label`, {'for': tasks.indexOf(task)}, task.task);
-    cacheElements([task.id, `${task.id}label`]);
-    events.emit('addTaskEvents', domCache[createId(task.id)]);
-  });
-  delete domCache.task;
+function displayTasks(data) {
+  const task = data[0];
+  const parent = document.getElementById(data[1].id);
+  console.log(task)
+  createElement('div', parent, `${task.id}-container`, {'class': 'project-task-container'});
+  const container = document.getElementById(`${task.id}-container`);
+  createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': data[1].tasks.indexOf(task)});
+  createElement('label', container, `${task.id}label`, {'for': data[1].tasks.indexOf(task)}, task.task);
+  cacheElements([task.id, `${task.id}label`]);
+  events.emit('addTaskEvents', domCache[createId(task.id)]);
 }
 
 function createId(id) {
