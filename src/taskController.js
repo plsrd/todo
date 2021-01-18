@@ -6,16 +6,21 @@ function initTaskController() {
   events.on('createTask', createTask);
 }
 
-function createTaskForm() {
-  if (!domCache.task) {
-    domCache.addTask.classList.add('disabled');
-    const container = domCache.tasksContainer;
-    createInputFields(['task'], container);
-    createElement('button', container, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
-    cacheElements(['task', 'task-btn']);
-    events.emit('taskInputCreated', domCache.task);
-    events.emit('taskBtnCreated', domCache.taskBtn);
+function createTaskForm(button) {
+  const parent = button.parentNode;
+  button.classList.add('disabled');
+
+  if(!domCache.taskForm) {
+    createElement('div', parent, 'task-form', {'class': 'task-form'});
+    cacheElements(['task-form']);
+
+    const container = domCache.taskForm;
+    createInputFields(['task', 'due-date'], container);
+    createElement('button', container, 'add-task', {'type': 'button'}, 'add task')
+    cacheElements(['task', 'add-task']);
+    events.emit('taskBtnCreated', domCache.addTask);
   }
+
 }
 
 class Task {
@@ -34,7 +39,9 @@ function createTask() {
   const value = domCache.task.value;
   if (value) {
     if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
-    const parent = domCache.task.parentElement.parentElement.id;
+    const parent = domCache.task.parentElement.parentElement.parentElement.id;
+    const newTask = new Task(value, parent);
+    console.log(newTask);
     events.emit('addNewTask', new Task(value, parent));
     domCache.task.value = '';
   } else {

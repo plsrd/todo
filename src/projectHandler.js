@@ -49,18 +49,13 @@ function updateTaskStatus(taskId) {
   const project = projects.find(project => project.id === data[0])
   const task = project.tasks.find(task => task.id === taskId.id);
   task.status = !task.status;
-  console.log(task.status)
   events.emit('taskStatusChanged', [taskId.id, task.status]);
 }
 
 function removeTag(tag) {
   const id = tag.parentNode.parentNode.id;
-  console.log(id)
   const project = projects.find(project => project.id === id);
-  console.log(project);
   const tagToDelete= tag.parentNode.firstChild.textContent;
-  console.log(tagToDelete);
   project.tags.splice(project.tags.indexOf(project.tags.find(item => item.content === tagToDelete)), 1);
-  console.log(project.tags)
 }
 export default initProjectHandler;

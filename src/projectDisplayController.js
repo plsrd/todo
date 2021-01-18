@@ -21,20 +21,19 @@ function drawProject(object) {
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
   createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
-  createElement('div', target, 'tasks-container', {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
-  cacheElements(['tasks-container']);
-  const container = domCache.tasksContainer;
-  createElement('p', container, 'task-header', {}, 'Tasks')
-  createElement('button', container, 'add-task', {'type': 'button', 'class': 'task-btn'}, '+');
-  cacheElements(['add-task']);
-  events.emit('addTaskBtnCreated', domCache.addTask);
+  createElement('div', target, `${object.id}tasks-container`, {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
+  cacheElements([`${object.id}tasks-container`]);
+  const container = domCache[`${object.id}tasksContainer`];
+  createElement('p', container, `${object.id}task-header`, {}, 'Tasks')
+  createElement('button', container, `${object.id}add-task`, {'type': 'button', 'class': 'task-btn'}, '+');
+  cacheElements([`${object.id}add-task`]);
+  events.emit('addTaskBtnCreated', domCache[`${object.id}addTask`]);
   displayTags(object.tags, target);
 }
 
 function displayTasks(data) {
   const task = data[0];
   const parent = document.getElementById(data[1].id);
-  console.log(task)
   createElement('div', parent, `${task.id}-container`, {'class': 'project-task-container'});
   const container = document.getElementById(`${task.id}-container`);
   createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': data[1].tasks.indexOf(task)});
@@ -62,7 +61,6 @@ function createId(id) {
 
 function updateTaskClass(data) {
   const element = domCache[createId(`${data[0]}label`)];
-  console.log(element);
   data[1] === true ? element.classList.add('complete') : element.classList.remove('complete');
 }
 

@@ -47,7 +47,7 @@ function taskInputEvents(input){
 
 function addTaskBtnEvents(button){
   button.addEventListener('click', () => {
-    events.emit('createTaskForm')
+    events.emit('createTaskForm', button);
   });
 }
 
