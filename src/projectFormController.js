@@ -27,6 +27,7 @@ export function cacheElements(els) {
 
 export function createElement(type, target, id, attributes, content) {
   const el = document.createElement(type);
+
   if (attributes.hasOwnProperty('prepend')) {
     target.prepend(el)
   } else {
@@ -35,9 +36,12 @@ export function createElement(type, target, id, attributes, content) {
   if (id !== 'none') {
     el.setAttribute('id', id)
   }
-  if (attributes && !attributes.hasOwnProperty('prepend')) {
+
+  if (attributes) {
     for (let key in attributes) {
-      el.setAttribute(key, attributes[key]);
+      if (key !== 'prepend') {
+        el.setAttribute(key, attributes[key]);
+      }
     }
   }
 
@@ -76,9 +80,12 @@ function createProjectForm() {
   const target = domCache.createProject;
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
+
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
+
   createInputFields(['notes'], target);
   events.emit('createTagsContainer', target);
+
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
   cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
   events.emit('projectFormCreated', domCache.createBtn);

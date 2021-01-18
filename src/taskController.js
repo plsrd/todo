@@ -13,7 +13,6 @@ function createTaskForm() {
     createInputFields(['task'], container);
     createElement('button', container, 'task-btn', {'type': 'button', 'class': 'task-btn'}, '+');
     cacheElements(['task', 'task-btn']);
-    domCache.tasks = [];
     events.emit('taskInputCreated', domCache.task);
     events.emit('taskBtnCreated', domCache.taskBtn);
   }

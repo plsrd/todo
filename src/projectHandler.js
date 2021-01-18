@@ -24,6 +24,7 @@ class Project {
     this.notes = notes;
     this.id = `proj${document.getElementsByClassName('project').length}`;
     this.tasks = [];
+    this.tags = [];
   }
 
 }
@@ -38,7 +39,6 @@ function addNewTask(task){
   const project = projects.find(project => project.id === task.parent);
   task.identifier = `${project.id}-task${project.tasks.length}`;
   project.tasks.push(task);
-  console.log(project);
   events.emit('drawTask', [task, project]);
 }
 

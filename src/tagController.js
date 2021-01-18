@@ -15,10 +15,33 @@ function createTagsContainer(target) {
   createElement('button', container, 'tag-btn', {'type': 'button'}, '+');
   cacheElements(['tag-input', 'tag-btn']);
   events.emit('tagBtnCreated', domCache.tagBtn);
+  domCache.currentTags = [];
+}
+
+class Tag {
+  constructor(content){
+    this.content = content;
+  }
+
+  set project(id) {
+    this.parent = id;
+  }
+
+  set class(num) {
+    this.clasNum = num;
+  }
+
 }
 
 function createTag() {
-  console.log(domCache.tagInput.value);
+  let newTag = new Tag(domCache.tagInput.value);
+  domCache.currentTags.push(newTag);
+  displayTags(newTag, domCache.tagsContainer);
+}
+
+function displayTags(tag, target) {
+  let classNum = `tag-${Math.floor(Math.random() * 11)}`;
+  createElement('p', target, 'none', {'class': `${classNum}`, 'prepend': true}, tag.content);
 }
 
 export default initTagController;
