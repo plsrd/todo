@@ -8,6 +8,7 @@ function initEventHandlers() {
   events.on('taskInputCreated', taskInputEvents);
   events.on('addTaskBtnCreated', addTaskBtnEvents);
   events.on('addTaskEvents', addTaskEvents);
+  events.on('addTagEvents', addTagEvents);
 }
 
 function addButtonEvents(){
@@ -54,6 +55,15 @@ function addTaskEvents(checkbox) {
   checkbox.addEventListener('click', () => {
     events.emit('taskComplete', checkbox);
   })
+}
+
+function addTagEvents() {
+  const tags = Array.from(document.getElementsByClassName('delete-tag'));
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      events.emit('removeTag', tag);
+    });
+  });
 }
 
 export default initEventHandlers;

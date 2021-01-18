@@ -25,13 +25,13 @@ class Tag {
   set class(num) {
     this.classNum = num;
   }
-
 }
 
 function createTag() {
   let newTag = new Tag(domCache.tagInput.value);
   domCache.currentTags.push(newTag);
   displayTags(newTag, domCache.tagsContainer);
+  domCache.tagInput.value = '';
 }
 
 function displayTags(tag, target) {

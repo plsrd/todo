@@ -6,6 +6,7 @@ function initProjectDisplay() {
   events.on('newProject', drawProject);
   events.on('drawTask', displayTasks);
   events.on('taskStatusChanged', updateTaskClass);
+  events.on('removeTag', removeTag);
 }
 
 function drawProject(object) {
@@ -27,7 +28,7 @@ function drawProject(object) {
   createElement('button', container, 'add-task', {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements(['add-task']);
   events.emit('addTaskBtnCreated', domCache.addTask);
-  displayTags(object.tags, container);
+  displayTags(object.tags, target);
 }
 
 function displayTasks(data) {
@@ -49,6 +50,7 @@ function displayTags(tags, target) {
     createElement('p', container, 'none', {}, tag.content);
     createElement('p', container, 'none', {'class':'delete-tag'}, 'X');
   });
+  events.emit('addTagEvents');
 }
 
 function createId(id) {
@@ -62,6 +64,10 @@ function updateTaskClass(data) {
   const element = domCache[createId(`${data[0]}label`)];
   console.log(element);
   data[1] === true ? element.classList.add('complete') : element.classList.remove('complete');
+}
+
+function removeTag(tag) {
+  tag.parentNode.parentNode.removeChild(tag.parentNode);
 }
 
 

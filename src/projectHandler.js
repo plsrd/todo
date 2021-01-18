@@ -5,6 +5,7 @@ function initProjectHandler() {
   getExistingProjects();
   events.on('taskComplete', updateTaskStatus);
   events.on('addNewTask', addNewTask);
+  events.on('removeTag', removeTag);
 }
 
 let projects = [];
@@ -52,4 +53,14 @@ function updateTaskStatus(taskId) {
   events.emit('taskStatusChanged', [taskId.id, task.status]);
 }
 
+function removeTag(tag) {
+  const id = tag.parentNode.parentNode.id;
+  console.log(id)
+  const project = projects.find(project => project.id === id);
+  console.log(project);
+  const tagToDelete= tag.parentNode.firstChild.textContent;
+  console.log(tagToDelete);
+  project.tags.splice(project.tags.indexOf(project.tags.find(item => item.content === tagToDelete)), 1);
+  console.log(project.tags)
+}
 export default initProjectHandler;
