@@ -27,6 +27,7 @@ function drawProject(object) {
   createElement('button', container, 'add-task', {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements(['add-task']);
   events.emit('addTaskBtnCreated', domCache.addTask);
+  displayTags(object.tags, container);
 }
 
 function displayTasks(data) {
@@ -39,6 +40,15 @@ function displayTasks(data) {
   createElement('label', container, `${task.id}label`, {'for': data[1].tasks.indexOf(task)}, task.task);
   cacheElements([task.id, `${task.id}label`]);
   events.emit('addTaskEvents', domCache[createId(task.id)]);
+}
+
+function displayTags(tags, target) {
+  tags.forEach(tag => {
+    createElement('div', target, `tag-${tags.indexOf(tag)}`, {'class': tag.classNum});
+    const container = document.getElementById(`tag-${tags.indexOf(tag)}`);
+    createElement('p', container, 'none', {}, tag.content);
+    createElement('p', container, 'none', {'class':'delete-tag'}, 'X');
+  });
 }
 
 function createId(id) {
@@ -54,23 +64,6 @@ function updateTaskClass(data) {
   data[1] === true ? element.classList.add('complete') : element.classList.remove('complete');
 }
 
-function displayTags(tags, target) {
-  let classNum = 0;
-  tags.forEach(tag => {
-    let name;
-    if (tag[0] === ' ') {
-      name  = tag.slice(1);
-    } else {
-      name = tag;
-    }
-    createElement('p', target, 'none', {'class': `${name} ${classNum}`}, tag);
-    if (classNum === 5) {
-      classNum = 0;
-    } else {
-      classNum++;
-    }
-  });
-}
 
 
 export default initProjectDisplay;

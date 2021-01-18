@@ -22,13 +22,8 @@ class Tag {
   constructor(content){
     this.content = content;
   }
-
-  set project(id) {
-    this.parent = id;
-  }
-
   set class(num) {
-    this.clasNum = num;
+    this.classNum = num;
   }
 
 }
@@ -40,8 +35,8 @@ function createTag() {
 }
 
 function displayTags(tag, target) {
-  let classNum = `tag-${Math.floor(Math.random() * 11)}`;
-  createElement('p', target, 'none', {'class': `${classNum}`, 'prepend': true}, tag.content);
+  tag.class = `tag-${Math.floor(Math.random() * 11)}`;
+  createElement('p', target, 'none', {'class': tag.class, 'prepend': true}, tag.content);
 }
 
 export default initTagController;

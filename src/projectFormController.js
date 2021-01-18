@@ -105,7 +105,7 @@ function batchFormInfo() {
       }
   }
   data.push(domCache.notes.value);
-  data.push(domCache.tasks);
+  data.push(domCache.currentTags);
   events.emit('createProject', data);
 }
 export default initProjectFormController;
