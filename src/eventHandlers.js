@@ -9,6 +9,7 @@ function initEventHandlers() {
   events.on('addTaskBtnCreated', addTaskBtnEvents);
   events.on('addTaskEvents', addTaskEvents);
   events.on('addTagEvents', addTagEvents);
+  events.on('closeFormCreated', closeFormEvents);
 }
 
 function addButtonEvents(){
@@ -63,6 +64,12 @@ function addTagEvents() {
     tag.addEventListener('click', () => {
       events.emit('removeTag', tag);
     });
+  });
+}
+
+function closeFormEvents(button) {
+  button.addEventListener('click', () => {
+    events.emit('closeForm', button.parentNode);
   });
 }
 

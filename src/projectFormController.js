@@ -4,6 +4,7 @@ import events from './eventsBus';
 function initProjectFormController() {
   events.on('addNewProject', createProjectForm);
   events.on('checkInputs', batchFormInfo);
+  events.on('closeForm', deleteForm);
 }
 
 export const domCache = {
@@ -78,6 +79,8 @@ function createProjectForm() {
   cacheElements(['create-project']);
 
   const target = domCache.createProject;
+  createElement('button', target, 'close-form', {'type': 'button'}, 'X');
+  events.emit('closeFormCreated', document.getElementById('close-form'));
   createInputFields(['title', 'description', 'due-date'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
 
@@ -89,6 +92,12 @@ function createProjectForm() {
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
   cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
   events.emit('projectFormCreated', domCache.createBtn);
+}
+
+function deleteForm(node) {
+  node.parentElement.removeChild(node);
+  domCache.addBtn.classList.remove('disabled');
+  delete domCache.taskForm;
 }
 
 
