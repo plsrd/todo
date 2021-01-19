@@ -17,10 +17,9 @@ function getExistingProjects() {
 }
 
 class Project {
-  constructor(title, description, dueDate, priority, notes, tags) {
+  constructor(title, description, priority, notes, tags) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
     this.priority = priority;
     this.notes = notes;
     this.id = `proj${document.getElementsByClassName('project').length}`;
@@ -31,7 +30,7 @@ class Project {
 }
 
 export const createNewProject = (data) => {
-  let newProject = new Project(data[0], data[1], data[2], data[3], data[4], data[5]);
+  let newProject = new Project(data[0], data[1], data[2], data[3], data[4]);
   projects.push(newProject);
   events.emit('newProject', newProject);
   console.log(newProject);

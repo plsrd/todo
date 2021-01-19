@@ -81,7 +81,7 @@ function createProjectForm() {
   const target = domCache.createProject;
   createElement('button', target, 'close-form', {'type': 'button'}, 'X');
   events.emit('closeFormCreated', document.getElementById('close-form'));
-  createInputFields(['title', 'description', 'due-date'], target);
+  createInputFields(['title', 'description'], target);
   createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
 
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
@@ -90,7 +90,7 @@ function createProjectForm() {
   events.emit('createTagsContainer', target);
 
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
-  cacheElements(['title', 'description', 'due-date', 'priority', 'notes', 'create-btn']);
+  cacheElements(['title', 'description', 'priority', 'notes', 'create-btn']);
   events.emit('projectFormCreated', domCache.createBtn);
 }
 
@@ -113,7 +113,7 @@ function deleteForm(node) {
 
 function batchFormInfo() {
   let data = [];
-  let keys = ['title', 'description', 'dueDate', 'priority'];
+  let keys = ['title', 'description', 'priority'];
   for (let i = 0; i < keys.length; i++){
       if (domCache[`${keys[i]}`].value !== '') {
         data.push(domCache[`${keys[i]}`].value);

@@ -17,7 +17,6 @@ function drawProject(object) {
 
   const target = domCache[`${object.id}`];
   createElement('h2', target, 'none', {'class': 'project-title'}, object.title);
-  createElement('p', target, 'none', {'class': 'project-due-date'}, object.dueDate);
   createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
   createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
   createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
