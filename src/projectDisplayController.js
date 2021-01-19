@@ -27,7 +27,14 @@ function drawProject(object) {
   createElement('button', container, `${object.id}add-task`, {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements([`${object.id}add-task`]);
   events.emit('addTaskBtnCreated', domCache[`${object.id}addTask`]);
+  addProjectToNav(object);
   displayTags(object.tags, target);
+}
+
+function addProjectToNav(object) {
+  const nav = document.getElementById('lists-lnk');
+  createElement('p', nav, `${object.id}-nav`, {'class': 'project-nav-link'}, object.title);
+  events.emit('addProjectNavLink', object);
 }
 
 function displayTasks(data) {

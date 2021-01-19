@@ -10,6 +10,7 @@ function initEventHandlers() {
   events.on('addTaskEvents', addTaskEvents);
   events.on('addTagEvents', addTagEvents);
   events.on('closeFormCreated', closeFormEvents);
+  events.on('addProjectNavLink', addProjectNavLink);
 }
 
 function addButtonEvents(){
@@ -73,6 +74,13 @@ function addTagEvents() {
 function closeFormEvents(button) {
   button.addEventListener('click', () => {
     events.emit('closeForm', button.parentNode);
+  });
+}
+
+function addProjectNavLink(object) {
+  const link = document.getElementById(`${object.id}-nav`);
+  link.addEventListener('click', () => {
+    events.emit('showProjectView', object);
   });
 }
 

@@ -6,6 +6,7 @@ function initProjectHandler() {
   events.on('taskComplete', updateTaskStatus);
   events.on('addNewTask', addNewTask);
   events.on('removeTag', removeTag);
+  events.on('showProjectView', showProjectView);
 }
 
 let projects = [];
@@ -56,5 +57,9 @@ function removeTag(tag) {
   const project = projects.find(project => project.id === id);
   const tagToDelete= tag.parentNode.firstChild.textContent;
   project.tags.splice(project.tags.indexOf(project.tags.find(item => item.content === tagToDelete)), 1);
+}
+
+function showProjectView(object){
+  console.log('show project view');
 }
 export default initProjectHandler;
