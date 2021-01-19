@@ -17,18 +17,19 @@ function createTaskForm(button) {
     const container = domCache.taskForm;
     createElement('button', container, 'close-form', {'type': 'button'}, 'X');
     events.emit('closeFormCreated', document.getElementById('close-form'));
-    createInputFields(['task'], container);
+    createInputFields(['task', 'due-date'], container);
     createElement('button', container, 'add-task', {'type': 'button'}, 'add task')
-    cacheElements(['task', 'add-task']);
+    cacheElements(['task', 'due-date','add-task']);
     events.emit('taskBtnCreated', domCache.addTask);
   }
 
 }
 
 class Task {
-  constructor(task, parent) {
+  constructor(task, parent, dueDate) {
     this.task = task;
     this.parent = parent;
+    this.dueDate = dueDate
     this.complete = false;
   }
 
@@ -42,9 +43,9 @@ function createTask() {
   if (value) {
     if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
     const parent = domCache.task.parentElement.parentElement.parentElement.id;
-    const newTask = new Task(value, parent);
+    const newTask = new Task(value, parent, domCache.dueDate.value);
     console.log(newTask);
-    events.emit('addNewTask', new Task(value, parent));
+    events.emit('addNewTask', newTask);
     domCache.task.value = '';
   } else {
     domCache.task.classList.add('empty');
