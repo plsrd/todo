@@ -16,6 +16,9 @@ function addButtonEvents(){
   const addBtn = document.getElementById('add');
   addBtn.addEventListener('click', () => {
     events.emit('addNewProject');
+    if (document.getElementById('task-form')) {
+      events.emit('closeForm', document.getElementById('task-form'));
+    }
   });
 }
 

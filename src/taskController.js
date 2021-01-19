@@ -15,6 +15,8 @@ function createTaskForm(button) {
     cacheElements(['task-form']);
 
     const container = domCache.taskForm;
+    createElement('button', container, 'close-form', {'type': 'button'}, 'X');
+    events.emit('closeFormCreated', document.getElementById('close-form'));
     createInputFields(['task', 'due-date'], container);
     createElement('button', container, 'add-task', {'type': 'button'}, 'add task')
     cacheElements(['task', 'add-task']);

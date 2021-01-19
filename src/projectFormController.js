@@ -95,8 +95,17 @@ function createProjectForm() {
 }
 
 function deleteForm(node) {
+  if (node.id.includes('project')) {
+    domCache.addBtn.classList.remove('disabled');
+  } else {
+    const buttons = Array.from(node.parentElement.getElementsByTagName('button'));
+    buttons.forEach(button => {
+      if (button.classList.contains('disabled')) {
+        button.classList.remove('disabled');
+      }
+    });
+  }
   node.parentElement.removeChild(node);
-  domCache.addBtn.classList.remove('disabled');
   delete domCache.taskForm;
 }
 
