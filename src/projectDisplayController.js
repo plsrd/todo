@@ -54,8 +54,17 @@ function displayTags(tags, target) {
     const container = document.getElementById(`tag-${tags.indexOf(tag)}`);
     createElement('p', container, 'none', {}, tag.content);
     createElement('p', container, 'none', {'class':'delete-tag'}, 'X');
+    addTagToNav(tag);
   });
   events.emit('addTagEvents');
+}
+
+function addTagToNav(tag) {
+  const nav = document.getElementById('tags-lnk');
+  if(!document.getElementById(tag.content)){
+    createElement('p', nav, tag.content, {'class': tag.classNum}, tag.content);
+    events.emit('addTagNavLink', tag);
+  }
 }
 
 function createId(id) {

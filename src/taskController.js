@@ -44,7 +44,6 @@ function createTask() {
     if (domCache.task.classList.contains('empty')) { domCache.task.classList.remove('empty') }
     const parent = domCache.task.parentElement.parentElement.parentElement.id;
     const newTask = new Task(value, parent, domCache.dueDate.value);
-    console.log(newTask);
     events.emit('addNewTask', newTask);
     domCache.task.value = '';
   } else {

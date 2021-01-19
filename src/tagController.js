@@ -3,7 +3,8 @@ import { domCache, cacheElements, createElement } from './projectFormController'
 
 function initTagController() {
   events.on('createTagsContainer', createTagsContainer);
-  events.on('createTag', createTag)
+  events.on('createTag', createTag);
+  events.on('showTagView', showTagView);
 }
 
 function createTagsContainer(target) {
@@ -37,6 +38,10 @@ function createTag() {
 function displayTags(tag, target) {
   tag.class = `tag-${Math.floor(Math.random() * 11)}`;
   createElement('p', target, 'none', {'class': tag.class, 'prepend': true}, tag.content);
+}
+
+function showTagView(tag) {
+  console.log('tag view');
 }
 
 export default initTagController;
