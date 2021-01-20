@@ -18,7 +18,7 @@ function createTaskForm(button) {
     createElement('button', container, 'close-form', {'type': 'button'}, 'X');
     events.emit('closeFormCreated', document.getElementById('close-form'));
     createInputFields(['task', 'due-date'], container);
-    createElement('button', container, 'add-task', {'type': 'button'}, 'add task')
+    createElement('button', container, 'add-task', {'type': 'button'}, 'add task');
     cacheElements(['task', 'due-date','add-task']);
     events.emit('taskBtnCreated', domCache.addTask);
   }
@@ -46,6 +46,7 @@ function createTask() {
     const newTask = new Task(value, parent, domCache.dueDate.value);
     events.emit('addNewTask', newTask);
     domCache.task.value = '';
+    events.emit('closeForm', domCache.task.parentElement)
   } else {
     domCache.task.classList.add('empty');
   }

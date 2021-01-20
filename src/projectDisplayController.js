@@ -6,7 +6,6 @@ function initProjectDisplay() {
   events.on('newProject', drawProject);
   events.on('drawTask', displayTasks);
   events.on('taskStatusChanged', updateTaskClass);
-  events.on('removeTag', removeTag);
 }
 
 function drawProject(object) {
@@ -28,7 +27,6 @@ function drawProject(object) {
   cacheElements([`${object.id}add-task`]);
   events.emit('addTaskBtnCreated', domCache[`${object.id}addTask`]);
   addProjectToNav(object);
-  displayTags(object.tags, target);
 }
 
 function addProjectToNav(object) {
@@ -48,24 +46,6 @@ function displayTasks(data) {
   events.emit('addTaskEvents', domCache[createId(task.id)]);
 }
 
-function displayTags(tags, target) {
-  tags.forEach(tag => {
-    createElement('div', target, `tag-${tags.indexOf(tag)}`, {'class': tag.classNum});
-    const container = document.getElementById(`tag-${tags.indexOf(tag)}`);
-    createElement('p', container, 'none', {}, tag.content);
-    createElement('p', container, 'none', {'class':'delete-tag'}, 'X');
-    addTagToNav(tag);
-  });
-  events.emit('addTagEvents');
-}
-
-function addTagToNav(tag) {
-  const nav = document.getElementById('tags-lnk');
-  if(!document.getElementById(tag.content)){
-    createElement('p', nav, tag.content, {'class': tag.classNum}, tag.content);
-    events.emit('addTagNavLink', tag);
-  }
-}
 
 function createId(id) {
   let key = id.split('-');
@@ -77,10 +57,6 @@ function createId(id) {
 function updateTaskClass(data) {
   const element = domCache[createId(`${data[0]}label`)];
   data[1] === true ? element.classList.add('complete') : element.classList.remove('complete');
-}
-
-function removeTag(tag) {
-  tag.parentNode.parentNode.removeChild(tag.parentNode);
 }
 
 

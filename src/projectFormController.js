@@ -87,7 +87,6 @@ function createProjectForm() {
   createSelect(target, 'priority', [1, 2, 3, 4, 5]);
 
   createInputFields(['notes'], target);
-  events.emit('createTagsContainer', target);
 
   createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
   cacheElements(['title', 'description', 'priority', 'notes', 'create-btn']);
@@ -123,7 +122,6 @@ function batchFormInfo() {
       }
   }
   data.push(domCache.notes.value);
-  data.push(domCache.currentTags);
   events.emit('createProject', data);
 }
 export default initProjectFormController;

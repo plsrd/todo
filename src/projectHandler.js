@@ -5,7 +5,6 @@ function initProjectHandler() {
   getExistingProjects();
   events.on('taskComplete', updateTaskStatus);
   events.on('addNewTask', addNewTask);
-  events.on('removeTag', removeTag);
   events.on('showProjectView', showProjectView);
 }
 
@@ -18,14 +17,13 @@ function getExistingProjects() {
 }
 
 class Project {
-  constructor(title, description, priority, notes, tags) {
+  constructor(title, description, priority, notes) {
     this.title = title;
     this.description = description;
     this.priority = priority;
     this.notes = notes;
     this.id = `proj${document.getElementsByClassName('project').length}`;
     this.tasks = [];
-    this.tags = tags;
   }
 
 }
@@ -34,7 +32,6 @@ export const createNewProject = (data) => {
   let newProject = new Project(data[0], data[1], data[2], data[3], data[4]);
   projects.push(newProject);
   events.emit('newProject', newProject);
-  console.log(newProject);
 }
 
 function addNewTask(task){
@@ -50,13 +47,6 @@ function updateTaskStatus(taskId) {
   const task = project.tasks.find(task => task.id === taskId.id);
   task.status = !task.status;
   events.emit('taskStatusChanged', [taskId.id, task.status]);
-}
-
-function removeTag(tag) {
-  const id = tag.parentNode.parentNode.id;
-  const project = projects.find(project => project.id === id);
-  const tagToDelete= tag.parentNode.firstChild.textContent;
-  project.tags.splice(project.tags.indexOf(project.tags.find(item => item.content === tagToDelete)), 1);
 }
 
 function showProjectView(object){

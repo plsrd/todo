@@ -3,15 +3,12 @@ import events from "./eventsBus";
 function initEventHandlers() {
   events.on('addButtonCreated', addButtonEvents);
   events.on('projectFormCreated', projectFormEvents);
-  events.on('tagBtnCreated', tagBtnEvents);
   events.on('taskBtnCreated', taskBtnEvents);
   events.on('taskInputCreated', taskInputEvents);
   events.on('addTaskBtnCreated', addTaskBtnEvents);
   events.on('addTaskEvents', addTaskEvents);
-  events.on('addTagEvents', addTagEvents);
   events.on('closeFormCreated', closeFormEvents);
   events.on('addProjectNavLink', addProjectNavLink);
-  events.on('addTagNavLink', addTagNavLink);
 }
 
 function addButtonEvents(){
@@ -27,12 +24,6 @@ function addButtonEvents(){
 function projectFormEvents(button) {
   button.addEventListener('click', () => {
     events.emit('checkInputs');
-  });
-}
-
-function tagBtnEvents(button) {
-  button.addEventListener('click', () => {
-    events.emit('createTag');
   });
 }
 
@@ -63,15 +54,6 @@ function addTaskEvents(checkbox) {
   })
 }
 
-function addTagEvents() {
-  const tags = Array.from(document.getElementsByClassName('delete-tag'));
-  tags.forEach(tag => {
-    tag.addEventListener('click', () => {
-      events.emit('removeTag', tag);
-    });
-  });
-}
-
 function closeFormEvents(button) {
   button.addEventListener('click', () => {
     events.emit('closeForm', button.parentNode);
@@ -82,13 +64,6 @@ function addProjectNavLink(object) {
   const link = document.getElementById(`${object.id}-nav`);
   link.addEventListener('click', () => {
     events.emit('showProjectView', object);
-  });
-}
-
-function addTagNavLink(tag) {
-  const tagLink = document.getElementById(tag.content);
-  tagLink.addEventListener('click', () => {
-    events.emit('showTagView', tag);
   });
 }
 
