@@ -42,6 +42,7 @@ function displayTasks(data) {
   const container = document.getElementById(`${task.id}-container`);
   createElement('input', container, `${task.id}`, {'type': 'checkbox', 'class': 'task', 'name': data[1].tasks.indexOf(task)});
   createElement('label', container, `${task.id}label`, {'for': data[1].tasks.indexOf(task)}, task.task);
+  createElement('p', container, `${task.id}-date`, {'class': 'due-date'}, task.dueDate);
   cacheElements([task.id, `${task.id}label`]);
   events.emit('addTaskEvents', domCache[createId(task.id)]);
 }
