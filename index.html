@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/reset.css">
   <link rel="stylesheet" href="../src/style.css">
   <title>Document</title>
 </head>
 <body>
-  <nav>
-    <div id="today-lnk" class="nav-lnk"><p>today</p></div>
-    <div id="lists-lnk" class="nav-lnk">
-      <p>lists</p>
+  <div class="app-window">
+    <div class='nav'>
+      <div id="today-lnk" class="nav-lnk">
+        <img src="/img/calendar.png" alt="today icon">
+        <p>today</p>
+      </div>
+      <div id="lists-lnk" class="nav-lnk">
+        <img src="/img/list.png" alt="list icon">
+        <p>lists</p>
+        <img src="/img/plus.png" alt="" id="add">
+      </div>
     </div>
-  </nav>
-  <main id="main">
-    <button id="add">add new project</button>
-    <div id="projects-window">
-    </div>
-  </main>
+    <main id="main">
+      <div id="projects-window"></div>
+    </main>
+  </div>
   
   <script src="main.js"></script>
 </body>
