@@ -6,20 +6,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../src/reset.css">
-  <link rel="stylesheet" href="../src/style.css">
+  <link rel="stylesheet" href="../src/main.css">
+  <link rel="stylesheet" href="../src/project-form.css">
+  <link rel="stylesheet" href="../src/projects.css">
   <title>Document</title>
 </head>
 <body>
   <div class="app-window">
     <div class='nav'>
+      <img src="/img/to-do.png" alt="logo" class="logo">
+      <div id="add" class="nav-lnk new-list">
+        <img src="/img/plus.png" alt="plus icon">
+        <p>new</p>
+      </div>
       <div id="today-lnk" class="nav-lnk">
         <img src="/img/calendar.png" alt="today icon">
         <p>today</p>
       </div>
-      <div id="lists-lnk" class="nav-lnk">
-        <img src="/img/list.png" alt="list icon">
-        <p>lists</p>
-        <img src="/img/plus.png" alt="" id="add">
+      <div id="lists-lnk" class="list-container">
+        <div class="list-header">
+          <img src="/img/list.png" alt="list icon">
+          <p>lists</p>
+        </div>
       </div>
     </div>
     <main id="main">
