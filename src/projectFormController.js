@@ -73,24 +73,25 @@ export function createInputFields(fields, target) {
 }
 
 function createProjectForm() {
-  domCache.addBtn.classList.add('disabled');
-  createElement('form', domCache.projectsWindow, 'create-project', {'prepend': true});
+  if(!document.getElementById('create-project')) {
+    createElement('form', domCache.projectsWindow, 'create-project', {'prepend': true, 'class': 'project-form'});
 
-  cacheElements(['create-project']);
+    cacheElements(['create-project']);
 
-  const target = domCache.createProject;
-  createElement('button', target, 'close-form', {'type': 'button'}, 'X');
-  events.emit('closeFormCreated', document.getElementById('close-form'));
-  createInputFields(['title', 'description'], target);
-  createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
+    const target = domCache.createProject;
+    createElement('button', target, 'close-form', {'type': 'button', 'class': 'close'}, 'X');
+    events.emit('closeFormCreated', document.getElementById('close-form'));
+    createInputFields(['title', 'description'], target);
+    createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
 
-  createSelect(target, 'priority', [1, 2, 3, 4, 5]);
+    createSelect(target, 'priority', [1, 2, 3, 4, 5]);
 
-  createInputFields(['notes'], target);
+    createInputFields(['notes'], target);
 
-  createElement('button', target, 'create-btn', {'type': 'button'}, 'create');
-  cacheElements(['title', 'description', 'priority', 'notes', 'create-btn']);
-  events.emit('projectFormCreated', domCache.createBtn);
+    createElement('button', target, 'create-btn', {'type': 'button', 'class': 'create-btn'}, 'create');
+    cacheElements(['title', 'description', 'priority', 'notes', 'create-btn']);
+    events.emit('projectFormCreated', domCache.createBtn);
+  }
 }
 
 function deleteForm(node) {
