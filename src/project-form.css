@@ -34,15 +34,9 @@
   width: 75px;
   height: 30px;
   font-size: 1em;
-  background-color: #485ef6;
   border-radius: 20px;
   padding-bottom: 5px;
   margin-top: 2em;
-  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .45);
-  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .45);
-  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .45);
-  border: none;
-  color: #ffffff;
 }
 
 .project-form label {

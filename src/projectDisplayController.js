@@ -24,8 +24,10 @@ function drawProject(object) {
   createElement('div', target, `${object.id}tasks-container`, {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
   cacheElements([`${object.id}tasks-container`]);
   const container = domCache[`${object.id}tasksContainer`];
-  createElement('p', container, `${object.id}task-header`, {}, 'Tasks')
-  createElement('button', container, `${object.id}add-task`, {'type': 'button', 'class': 'task-btn'}, '+');
+  createElement('div', container, `${object.id}-add`, {'class': 'task-header'});
+  const header = document.getElementById(`${object.id}-add`);
+  createElement('p', header, `${object.id}task-header`, {}, 'Tasks')
+  createElement('button', header, `${object.id}add-task`, {'type': 'button', 'class': 'task-btn'}, '+');
   cacheElements([`${object.id}add-task`]);
   events.emit('addTaskBtnCreated', domCache[`${object.id}addTask`]);
   addProjectToNav(object);

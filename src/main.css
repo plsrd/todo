@@ -8,6 +8,21 @@ body {
   background-attachment: fixed;
 }
 
+button {
+  font-family: 'Lato', sans-serif;
+  background-color: #485ef6;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .45);
+  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .45);
+  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .45);
+}
+
+button:focus {
+  outline: none;
+}
+
 .app-window {
   position: absolute;
   top: 50%;
@@ -80,6 +95,12 @@ body {
   font-size: 1.1em;
   flex-grow: 1;
   margin: .3em 0 .5em 0;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #b0aeb7;
+}
+
+.list-container p {
+  margin-top: .5em;
 }
 
 main {
@@ -96,7 +117,7 @@ main {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
-  padding: 2em;
+  padding: 2em 3em;
 }
 
 .new-list {
@@ -105,7 +126,7 @@ main {
   -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .45);
   -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .45);
   box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .45);
-  margin-bottom: 2em;;
+  margin-bottom: 2em;
 }
 
 .disabled {

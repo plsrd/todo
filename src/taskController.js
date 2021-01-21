@@ -7,7 +7,7 @@ function initTaskController() {
 }
 
 function createTaskForm(button) {
-  const parent = button.parentNode;
+  const parent = button.parentNode.parentNode;
   button.classList.add('disabled');
 
   if(!domCache.taskForm) {
@@ -15,10 +15,10 @@ function createTaskForm(button) {
     cacheElements(['task-form']);
 
     const container = domCache.taskForm;
-    createElement('button', container, 'close-form', {'type': 'button'}, 'X');
+    createElement('button', container, 'close-form', {'type': 'button', 'class': 'close-btn'}, 'X');
     events.emit('closeFormCreated', document.getElementById('close-form'));
     createInputFields(['task', 'due-date'], container);
-    createElement('button', container, 'add-task', {'type': 'button'}, 'add task');
+    createElement('button', container, 'add-task', {'type': 'button', 'class': 'create-task-btn'}, 'add task');
     cacheElements(['task', 'due-date','add-task']);
     events.emit('taskBtnCreated', domCache.addTask);
   }
