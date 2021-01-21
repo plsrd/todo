@@ -15,9 +15,11 @@ function drawProject(object) {
   cacheElements([object.id]);
 
   const target = domCache[`${object.id}`];
-  createElement('h2', target, 'none', {'class': 'project-title'}, object.title);
-  createElement('p', target, 'none', {'class': `priority-${object.priority}`}, object.priority);
-  createElement('p', target, 'none', {'class': 'project-decription'}, object.description);
+  createElement('div', target, `${object.title}-container`, {'class': 'title-container'});
+  const titleContainer = document.getElementById(`${object.title}-container`);
+  createElement('h2', titleContainer, 'none', {'class': 'project-title'}, object.title);
+  createElement('p', titleContainer, 'none', {'class': `priority priority-${object.priority}`}, object.priority);
+  createElement('p', target, 'none', {'class': 'project-description'}, object.description);
   createElement('p', target, 'none', {'class': 'project-notes'}, object.notes);
   createElement('div', target, `${object.id}tasks-container`, {'class': 'tasks-container', 'type': 'text', 'placeholder': 'task'});
   cacheElements([`${object.id}tasks-container`]);

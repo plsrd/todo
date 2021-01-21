@@ -1,0 +1,114 @@
+body {
+  font-family: 'Lato', sans-serif;
+  background: rgb(241,217,230);
+  background: linear-gradient(141deg, rgba(239, 209, 219,1) 0%, rgba(210,213,232,1) 93%);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.app-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);  
+  height: 80%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff99;
+  border-radius: 2em;
+}
+
+.nav {
+  box-sizing: border-box;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding: 1em .8em 1em .3em;
+}
+
+.nav-lnk {
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: row;
+  color: #b0aeb7;
+  align-items: center;
+  background-color: #ffffffb3;
+  padding: .5em 1em;
+  margin: 1em .8em 0 1em;
+  border-radius: 1em;
+  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .25);
+}
+
+.nav-lnk p, .list-header p {
+  margin: 0 1.5em;
+}
+
+.nav-lnk img {
+  width: 23px;
+}
+
+.logo {
+  align-self: center;
+  width: 75px;
+  margin: 2em 0 2em 0;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  color: #b0aeb7;
+  border-radius: 1em;
+  background-color: #ffffffb3;
+  padding: .5em 1em;
+  margin: 1em .8em 0 1em;
+  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .25);
+}
+
+.list-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.1em;
+  flex-grow: 1;
+  margin: .3em 0 .5em 0;
+}
+
+main {
+  box-sizing: border-box;
+  background-color: #ffffff;
+  flex-grow: 1;
+  border-radius: 2em;
+  margin: 1em 1em 1em 0;
+}
+
+#projects-window {
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  padding: 2em;
+}
+
+.new-list {
+  background-color: #485ef6;
+  color: #ffffff;
+  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .45);
+  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .45);
+  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .45);
+  margin-bottom: 2em;;
+}
+
+.disabled {
+  display: none;
+}
+

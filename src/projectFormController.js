@@ -68,7 +68,7 @@ export function createInputFields(fields, target) {
     const fieldName = field.split('-').join(' ');
     const type = (field.includes('date')) ? 'date' : 'text';
     createElement('label', target, 'none', {'for': field}, fieldName);
-    createElement('input', target, field, {'type': type, 'placeholder': fieldName});
+    createElement('input', target, field, {'type': type, 'placeholder': fieldName, 'class': 'form-input'});
     });
 }
 
@@ -85,8 +85,6 @@ function createProjectForm() {
     createElement('label', target, 'priority-label', {'for': 'priority'}, 'priority');
 
     createSelect(target, 'priority', [1, 2, 3, 4, 5]);
-
-    createInputFields(['notes'], target);
 
     createElement('button', target, 'create-btn', {'type': 'button', 'class': 'create-btn'}, 'create');
     cacheElements(['title', 'description', 'priority', 'notes', 'create-btn']);
@@ -117,12 +115,14 @@ function batchFormInfo() {
   for (let i = 0; i < keys.length; i++){
       if (domCache[`${keys[i]}`].value !== '') {
         data.push(domCache[`${keys[i]}`].value);
+        if (domCache[`${keys[i]}`].classList.contains('empty')) {
+          domCache[`${keys[i]}`].classList.remove('empty');
+        }
       } else {
         domCache[`${keys[i]}`].classList.add('empty');
         return
       }
   }
-  data.push(domCache.notes.value);
   events.emit('createProject', data);
 }
 export default initProjectFormController;

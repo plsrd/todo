@@ -1,0 +1,46 @@
+.project {
+  margin: 1em 0;
+}
+.project-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.project-description {
+  font-style: italic;
+  margin-bottom: .8em;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.priority {
+  padding: .5em .7em;
+  text-align: center;
+  border-radius: 50%;
+  color: #ffffff;
+  -webkit-box-shadow: -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  -moz-box-shadow:    -4px 3px 15px 0px rgba(176, 174, 183, .25);
+  box-shadow:         -4px 3px 15px 0px rgba(176, 174, 183, .25);
+}
+
+.priority-1 {
+  background-color: #F56C6E;
+}
+
+.priority-2 {
+  background-color: #8B8DF6;
+}
+
+.priority-3 {
+  background-color: #00B58B;
+}
+
+.priority-4 {
+  background-color: #4D8787;
+}
